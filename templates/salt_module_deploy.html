@@ -1,0 +1,120 @@
+{% extends "index.html" %}
+{% block title %}Opsa{% endblock %}
+{% block content %}
+			<div class="page-content">
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">Dashboard</a>
+                        </li>
+                        <li class="active">部署管理</li>
+						<li class="active">部署模块管理</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                <!-- Page Header -->
+				<div class="page-header position-relative">
+                    <div class="header-title">
+                        <h1>
+                           部署模块管理
+                        </h1>
+                    </div>
+                    <!--Header Buttons-->
+                    <div class="header-buttons">
+                        <a class="sidebar-toggler" href="#">
+                            <i class="fa fa-arrows-h"></i>
+                        </a>
+                        <a class="refresh" id="refresh-toggler" href="">
+                            <i class="glyphicon glyphicon-refresh"></i>
+                        </a>
+                        <a class="fullscreen" id="fullscreen-toggler" href="#">
+                            <i class="glyphicon glyphicon-fullscreen"></i>
+                        </a>
+                    </div>
+                    <!--Header Buttons End-->
+                </div>
+                <!-- /Page Header -->
+
+       <div class="row">
+            <div class="col-md-12">
+                 <div class="panel panel-default">
+                      <div class="panel-body">
+                             <form class="form-horizontal form-border" method="post" enctype="multipart/form-data" action="/deploy/module_deploy/?action=deploy">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">目标主机</label>
+                                        <div class=" col-sm-6">
+                                            <!--input type="text" class="form-control" name="tgt" value={{ tgt }}-->
+											<!--test-->
+											 <!--hr class="wide" /-->                                           
+                                            <select id="e2" multiple="multiple" style="width: 100%;;" name="tgt">
+												{% for host in hostlists %}
+                                                <option value="{{ host.hostname }}"/>{{ host.hostname }}
+												{% endfor %}
+                                            </select> 
+											<!--test-->											
+                                        </div>
+									</div><!--end form-group-->
+                                    <div class="form-group">
+                                          <label class="col-sm-3 control-label">安装模块</label>										 
+                                          <div class="col-sm-6">
+												<label class="checkbox-inline">
+                                                   <input type="checkbox" class="colored-blue" value="base.expressuser" name="module"><span class="text">express-user</span></label>
+                                               <label class="checkbox-inline">
+                                                   <input class="colored-blue" type="checkbox" value="webserver.httpd" name="module"><span class="text">Apached</span></label>
+                                               <label class="checkbox-inline">
+                                                   <input class="colored-blue" type="checkbox" value="webserver.java6" name="module"><span class="text">java-1.6</span></label>
+												   <label class="checkbox-inline">
+                                                   <input class="colored-blue" type="checkbox" value="webserver.java7" name="module"><span class="text">java-1.7</span></label>
+                                               <label class="checkbox-inline">
+                                                   <input disabled="disabled" class="colored-blue" type="checkbox" value="mysql" name="module"><span class="text">MySQL</span></label>
+                                               <label class="checkbox-inline">
+                                                   <input disabled="disabled" class="colored-blue" type="checkbox" value="redis" name="module"><span class="text">Redis</span></label>
+                                               <label class="checkbox-inline">
+                                                   <input disabled="disabled" class="colored-blue" type="checkbox" value="memcached" name="module"><span class="text">Memcached</span></label>
+												    <label class="checkbox-inline">
+                                                   <input class="colored-blue" type="checkbox" value="zabbix.agent" name="module"><span class="text">Zabbix-PROD</span></label>
+                                               <label class="checkbox-inline">
+                                                   <input class="colored-blue" type="checkbox" value="zabbix.agent_test" name="module"><span class="text">Zabbix测试</span></label>
+                                               <label class="checkbox-inline">
+                                                   <input disabled="disabled" class="colored-blue" type="checkbox" value="logstash" name="module"><span class="text">日志采集</span></label>
+                                               <label class="checkbox-inline">
+                                                   <input class="colored-blue" type="checkbox" value="sysinit_1" name="module"><span class="text">华星初始化</span></label>
+												    <label class="checkbox-inline">
+                                                   <input class="colored-blue" type="checkbox" value="sysinit_2" name="module"><span class="text">联通初始化</span></label>
+												    <label class="checkbox-inline">
+                                                   <input class="colored-blue" type="checkbox" value="sysinit_3" name="module"><span class="text">华数初始化</span></label>
+												   <label class="checkbox-inline">
+                                                   <input class="colored-blue" type="checkbox" value="apps.q9" name="module"><span class="text">Q9中间件部署</span></label>
+                                          </div>
+                                    </div>
+                                    <div class="form-group">
+                                         <input type="hidden" name="mod" value={{ module }}>
+                                         <div class="col-sm-offset-8 col-sm-10">
+                                              <button type="submit" class="btn btn-primary">提交</button>
+                                         </div>
+                                    </div>
+                                    <div class="form-group">
+                                          <label class="col-sm-3 control-label">返回结果</br></label>
+                                          <div class="col-sm-6">
+                                               <textarea class="form-control" rows="10">
+											   {{ jid }}
+											   {{ ret_err }}
+											   </textarea>
+                                          </div>
+                                    </div>
+                             </form>
+							 {% if jid %}
+							 <div class="pull-left">							  
+							   <a href="{% url 'job_list' %}" class="btn btn-info btn-sm" role="button">查看结果</a>
+							 </div>
+							{% endif %}
+                      </div>
+                 </div>
+            </div>
+       </div>
+       <!--row end-->
+
+{% endblock %}

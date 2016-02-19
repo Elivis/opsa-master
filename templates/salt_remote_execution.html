@@ -1,0 +1,104 @@
+{% extends "index.html" %}
+{% block title %}OPSA-remote_execution{% endblock %}
+{% block content %}
+			<div class="page-content">
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">Dashboard</a>
+                        </li>
+                        <li class="active">部署管理</li>
+						<li class="active">远程命令</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                <!-- Page Header -->
+				<div class="page-header position-relative">
+                    <div class="header-title">
+                        <h1>
+                            远程命令
+                        </h1>
+                    </div>
+                    <!--Header Buttons-->
+                    <div class="header-buttons">
+                        <a class="sidebar-toggler" href="#">
+                            <i class="fa fa-arrows-h"></i>
+                        </a>
+                        <a class="refresh" id="refresh-toggler" href="">
+                            <i class="glyphicon glyphicon-refresh"></i>
+                        </a>
+                        <a class="fullscreen" id="fullscreen-toggler" href="#">
+                            <i class="glyphicon glyphicon-fullscreen"></i>
+                        </a>
+                    </div>
+                    <!--Header Buttons End-->
+                </div>
+                <!-- /Page Header -->
+
+       <div class="row">
+            <div class="col-md-12">
+                 <div class="panel panel-default">
+                      <div class="panel-body">
+                             <form class="form-horizontal form-border" method="post" enctype="multipart/form-data" action="/deploy/remote_execution/">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">目标主机</label>
+                                        <div class="input-group col-sm-6">
+                                            <!--input type="text" class="form-control" name="tgt" value={{ tgt }}-->
+											<!--test-->
+											 <!--hr class="wide" /-->                                           
+                                            <select id="e2" multiple="multiple" style="width: 100%;;" name="tgt">
+												{% for host in hostlists %}
+                                                <option value="{{ host.hostname }}"/>{{ host.hostname }}
+												{% endfor %}
+                                            </select> 
+											<!--test-->											
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">命令类型</label>										
+                                        <div class="input-group col-sm-6">									
+											<select name="action">
+												<option value="exec" />cmd.run
+												<option value="grains" />Grains.item										
+											</select>
+										</div>
+                                    </div>
+									<div class="form-group">
+                                        <label class="col-sm-3 control-label">远程命令</label>										
+                                        <div class="input-group col-sm-6">										
+											<input type="text" class="form-control" name="arg" value={{ arg }}>
+										</div>
+                                    </div>
+                                    <div class="form-group">
+                                         <div class="col-sm-offset-8 col-sm-10">
+												<!--input type="hidden" name="tgt" value={{ tgt }}-->
+                                              <button type="submit" class="btn btn-primary">提交</button>
+                                         </div>
+                                    </div>
+                                    <div class="form-group">
+                                          <label class="col-sm-3 control-label">返回结果</label>
+                                          <div class="input-group col-sm-6">
+											  {% if ret_cmd_msg %}
+											  <textarea class="form-control" rows="10" >
+												  {% for ret_cmd_msg in ret_cmd_msg %}
+													{{ret_cmd_msg}}
+												  {%endfor%}
+											  </textarea>
+											  {%elif ret_err%}
+                                              <textarea class="form-control" rows="10">{{ ret_err }}</textarea>
+											  {% else %}
+											  <textarea class="form-control" rows="10">{{ ret}}</textarea>
+											  {% endif %}
+                                          </div>
+                                    </div>
+                             </form>
+                      </div>
+                 </div>
+            </div>
+       </div>
+       <!--row end-->
+
+{% endblock %}

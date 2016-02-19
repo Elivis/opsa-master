@@ -1,0 +1,147 @@
+{% extends "host_list.html" %}
+
+{% block content %}
+<div class="page-content">
+<!-- Page Breadcrumb -->
+	<div class="page-breadcrumbs">
+		<ul class="breadcrumb">
+			<li>
+				<i class="fa fa-home"></i>
+				<a href="/">Dashboard</a>
+			</li>
+			<li class="active">装机管理</li>
+			<li class="active">{{ page_name }}</li>
+		</ul>
+	</div>
+<!-- /Page Breadcrumb -->
+<!-- Page Header -->
+	<div class="page-header position-relative">
+		<div class="header-title">
+			<h1>
+				{{ page_name }}
+			</h1>
+		</div>
+		<!--Header Buttons-->
+		<div class="header-buttons">
+			<a class="sidebar-toggler" href="#">
+				<i class="fa fa-arrows-h"></i>
+			</a>
+			<a class="refresh" id="refresh-toggler" href="">
+				<i class="glyphicon glyphicon-refresh"></i>
+			</a>
+			<a class="fullscreen" id="fullscreen-toggler" href="#">
+				<i class="glyphicon glyphicon-fullscreen"></i>
+			</a>
+		</div>
+		<!--Header Buttons End-->
+	</div>
+<!-- /Page Header -->
+
+	<div class="raw">
+		<div class="widget  radius-bordered">					
+			<div class="widget-body">
+				<form id="form" method="post" class="form-horizontal" action=".">
+				{% csrf_token %}
+					<div class="form-group">
+						<label class="col-lg-3 control-label">类型选择:<sup>*</sup></label>
+						<div class="col-lg-8">
+						{{ form.pv_type }}
+						{{ form.pv_type.errors }}
+					</div>
+					</div>
+					<hr class="wide" />
+					<div class="form-group">
+						<label class="col-lg-2 control-label">机房: <sup>*</sup></label>
+						<div class="col-lg-4">
+							{{ form.sroom }}
+							{{ form.sroom.errors }}
+						</div>
+						<label class="col-lg-2 control-label">IP地址:<sup>*</sup></label>
+						<div class="col-lg-4">
+							{{ form.ip }}
+							{{ form.ip.errors }}
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 control-label">主机名:<sup>*</sup></label>
+						<div class="col-lg-4">
+							{{ form.hostname }}
+							{{ form.hostname.errors }}
+						</div>
+						<label class="col-lg-2 control-label">MAC地址:<sup>*</sup></label>
+						<div class="col-lg-4">
+							{{ form.macaddress }}
+							{{ form.macaddress.errors }}
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 control-label">操作系统:<sup>*</sup></label>
+						<div class="col-lg-4">
+							{{ form.system_version }}
+							{{ form.system_version.errors }}
+						</div>
+						<label class="col-lg-2 control-label">状态:<sup>*</sup></label>
+						<div class="col-lg-4">
+							{{ form.status }}
+							{{ form.status.errors }}
+						</div>
+					</div>					
+					{% if pv_type_id == 1 %}
+						<hr class="wide" />
+						<div id="phipmi" style="display: visible;">
+					{% else %}
+						<hr class="wide" />
+						<div id="phipmi" style="display: none;">
+					{% endif %}	
+						<div class="form-group">
+							<label class="col-lg-2 control-label">IPMIIP:</label>
+							<div class="col-lg-4">
+								{{ form.ipmi_ip }}
+								{{ form.ipmi_ip.errors }}
+							</div>
+							<label class="col-lg-2 control-label">IPMIuser</label>
+							<div class="col-lg-4">
+								{{ form.ipmi_user }}
+								{{ form.ipmi_user.errors }}
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-lg-2 control-label">IPMI密码</label>
+							<div class="col-lg-4">
+								{{ form.ipmi_passwd }}
+								{{ form.ipmi_passwd.errors }}
+							</div>
+							<label class="col-lg-2 control-label">RAID配置</label>
+							<div class="col-sm-4">						
+								{{ form.raid_type }}
+								{{ form.raid_type.errors }}
+							</div>
+						</div>
+					</div>
+					<hr class="wide" />
+
+					<div class="form-group">
+						<div class="col-lg-8 col-lg-offset-4">
+						{% ifequal action 'edit' %}
+						 <button type="submit" class="btn btn-primary" name="operate" value="update">更新</button>
+						{% endifequal %}
+						{% ifequal action 'add' %}
+						 <button type="submit" class="btn btn-primary" name="operate" value="add">添加</button>
+						{% endifequal %}						
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+
+ 
+	<div>
+	<div>
+    <!--Google Analytics::Demo Only-->       
+{% endblock %}
+

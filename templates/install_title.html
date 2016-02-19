@@ -1,0 +1,12 @@
+<html>
+		<div class="well bordered-bottom text-center">
+		
+			<a href="{% url add_install %}" class="btn btn-palegreen"><span class="badge badge-primary graded">1</span>添加信息</a>
+			 <strong><span class="green">-----------------------</span></strong>
+			<a href="{% url install_list %}" class="btn btn-circle btn-blue btn-lg"><span class="badge badge-info graded">2</span><p class="text-center">待安装</p></a>
+			<strong><span class="info">-----------------------</span></strong>
+			<a href="{% url install_status %}" class="btn btn-sky shiny"><span class="badge badge-success graded">3</span>安装进度</a>
+			<strong><span class="magenta">-----------------------</span></strong>
+			<a href="{% url deploy_init %}" class="btn btn-magenta"><span class="badge badge-darkorange graded">4</span>初始化</a>			
+		</div>
+</html>

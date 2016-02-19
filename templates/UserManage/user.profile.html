@@ -1,0 +1,41 @@
+{% extends "index.html" %}
+
+{% block title %}
+    Edit User
+{% endblock %}
+
+{% block content %}
+<div class="page-content">
+    <div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-body panel-default">
+			<h5 class="row-title before-sky"><i class="glyphicon glyphicon-compressed sky"></i>User Profile</h5>
+				<hr/>
+
+				<form class="form-horizontal" role="form" action={% url "edituserurl" ID %} method="POST" >
+				{% csrf_token %}
+
+					{% for item in form %}
+						<div class="form-group">
+							<label class="control-label col-md-1">{{item.label}}</label>
+							<div class="col-md-2">
+								{{item}}
+							</div>
+							<div class="col-md-offset-1 col-md-10">
+								{{item.errors}}
+							</div>
+						</div>
+					{% endfor %}
+
+					<div class="form-group">
+						<div class="col-md-offset-1 col-md-10">
+							<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('确认更新吗？')">更 新</button>
+							<a class="btn btn-danger btn-sm" href={% url "resetpasswordurl" ID %} onclick="return confirm('确认重置密码吗？？')">重置密码</a>
+						<div>
+					</div>
+				</form>
+			</div><!--/panel-body-->
+		</div><!--/col-md-12-->
+	</div><!--/row-->
+</div><!--/page-content-->
+{% endblock %}

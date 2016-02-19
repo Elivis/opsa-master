@@ -1,0 +1,106 @@
+{% extends "index.html" %}
+{% block title %}OPS_Install{% endblock %}
+{% block css %}
+<!-- DataTables-->
+<link rel="stylesheet" href="/static/plugins/dataTables/css/dataTables.css">
+{% endblock %}
+{% block content %}
+<div class="page-content">
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">Dashboard</a>
+                        </li>
+                        <li class="active">API管理</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                <!-- Page Header -->
+				<div class="page-header position-relative">
+                    <div class="header-title">
+                        <h1>
+                            API列表
+                        </h1>
+                    </div>
+                    <!--Header Buttons-->
+                    <div class="header-buttons">
+                        <a class="sidebar-toggler" href="#">
+                            <i class="fa fa-arrows-h"></i>
+                        </a>
+                        <a class="refresh" id="refresh-toggler" href="">
+                            <i class="glyphicon glyphicon-refresh"></i>
+                        </a>
+                        <a class="fullscreen" id="fullscreen-toggler" href="#">
+                            <i class="glyphicon glyphicon-fullscreen"></i>
+                        </a>
+                    </div>
+                    <!--Header Buttons End-->
+                </div>
+                <!-- /Page Header -->
+
+
+       <div class="row">
+            <div class="col-md-12">
+                 <div class="panel panel-default">
+                      <div class="panel-body">
+                           {% if all_config_api_list %}
+                           <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                               <thead>
+                                   <tr>
+                                      <th>ID</th>
+									  <th>所属机房</th>
+                                      <th>类型</th>
+                                      <th>URL</th>
+                                      <th>用户</th>
+                                      <th>密码</th>
+                                      <th>创建时间</th>
+									  <th>操作</th>
+                                   </tr>
+                               </thead>
+                               
+                               <tbody>
+                               {% for api_list in all_config_api_list %}
+                                   <tr>
+                                      <td>{{ forloop.counter }}</td>
+									  <td>{{ api_list.sroom }}</td>
+									  <td>{{ api_list.type }}</td>
+                                      <td>{{ api_list.url }}</td>
+                                      <td>{{ api_list.user }}</td>
+                                      <td>{{ api_list.password }}</td>
+                                      <td>{{ api_list.create_date }}</td>
+                                      <td><a href="{% url 'config_api_add' id=api_list.id %}" class="btn btn-info btn-sm">编辑</a> 
+                                          <a href="{% url 'config_api_add' %}" style="color:white" class="btn btn-danger btn-sm" role="button">新增</a>
+                                      </td>
+                                   </tr>
+                               {% endfor %}
+                               </tbody>
+                            </table>
+                           {% endif %}
+                           <div class="row">
+                                <div class="col-xs-6">
+                                      <div class="dataTables_info" id="example_info" role="alert" aria-live="polite" aria-relevant="all">
+									  </div>
+                                </div>
+                                <div class="col-xs-6">
+                                      <div class="dataTables_paginate paging_simple_numbers" id="exmaple_paginate">
+                                           {% if all_config_api_list.has_previous %}
+                                                 <a href="?page={{ all_config_api_list.previous_page_number }}">上一页</a>
+                                           {% endif %}
+                                           <span class="current">
+                                                 第{{ all_config_api_list.number }}页，共{{ all_config_api_list.paginator.num_pages }}页
+                                           </span>
+                                           {% if all_config_api_list.has_next %}
+                                                 <a href="?page={{ all_config_api_list.next_page_number }}">下一页</a>
+                                           {% endif %}
+                                      </div>
+                                </div>
+                           </div> <!--row end-->                                   
+                        </div>
+                     </div>
+                 </div>
+             </div>
+      	<!--row end-->
+
+{% endblock %}

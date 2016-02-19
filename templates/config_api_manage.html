@@ -1,0 +1,102 @@
+{% extends "host_list.html" %}
+{% block content %}
+			<div class="page-content">
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">Dashboard</a>
+                        </li>
+                        <li class="active">API配置列表</li>
+						<li class="active">{{ page_name }}</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                <!-- Page Header -->
+				<div class="page-header position-relative">
+                    <div class="header-title">
+                        <h1>
+                            {{ page_name }}
+                        </h1>
+                    </div>
+                    <!--Header Buttons-->
+                    <div class="header-buttons">
+                        <a class="sidebar-toggler" href="#">
+                            <i class="fa fa-arrows-h"></i>
+                        </a>
+                        <a class="refresh" id="refresh-toggler" href="">
+                            <i class="glyphicon glyphicon-refresh"></i>
+                        </a>
+                        <a class="fullscreen" id="fullscreen-toggler" href="#">
+                            <i class="glyphicon glyphicon-fullscreen"></i>
+                        </a>
+                    </div>
+                    <!--Header Buttons End-->
+                </div>
+                <!-- /Page Header -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <form class="form-horizontal form-border" id="form" method="post" action=".">
+                                       {% csrf_token %}
+                                       <div class="form-group">
+                                             <label class="col-sm-3 control-label">机房</label>
+                                             <div class="col-sm-6">
+                                             {{ form.sroom }}
+                                             {{ form.sroom.errors }}
+                                             </div>
+                                       </div>
+									    <div class="form-group">
+                                             <label class="col-sm-3 control-label">类型</label>
+                                             <div class="col-sm-6">
+                                             {{ form.type }}
+											 {{ form.type.errors }}
+                                             </div>
+                                        </div>
+									   <div class="form-group">
+                                             <label class="col-sm-3 control-label">URL</label>
+                                             <div class="col-sm-6">
+                                             {{ form.url }}
+                                             {{ form.url.errors }}
+                                             </div>
+                                       </div>
+									   <div class="form-group">
+                                             <label class="col-sm-3 control-label">FQDN</label>
+                                             <div class="col-sm-6">
+                                             {{ form.fqdn }}
+                                             {{ form.fqdn.errors }}
+                                             </div>
+                                       </div>
+                                       <div class="form-group">
+                                             <label class="col-sm-3 control-label">用户</label>
+                                             <div class="col-sm-6">
+                                             {{ form.user }}
+                                             {{ form.user.errors }}
+                                             </div>
+                                        </div>
+                                       <div class="form-group">
+                                             <label class="col-sm-3 control-label">密码</label>
+                                             <div class="col-sm-6">
+                                             {{ form.password }}
+                                             {{ form.password.errors }}
+                                             </div>
+                                        </div>
+										<div class="col-sm-offset-8 col-sm-10">
+											{% ifequal action 'edit' %}
+                                             <button type="submit" class="btn btn-primary" name="operate" value="update">更新</button>
+											{% endifequal %}
+											{% ifequal action 'add' %}
+                                             <button type="submit" class="btn btn-primary" name="operate" value="add">添加</button>
+											{% endifequal %}
+										</div>
+                                    </div>
+                                </form>
+
+                            </div> <!-- panel body -->
+                        </div> <!-- panel end -->
+                    </div> <!-- col end -->
+                </div> <!-- row end -->
+
+{% endblock %}

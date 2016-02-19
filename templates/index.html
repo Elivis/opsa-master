@@ -1,0 +1,1083 @@
+{% load url from future %}
+<!DOCTYPE html>
+<!--
+BeyondAdmin - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.2.0
+Version: 1.0.0
+Purchase: http://wrapbootstrap.com
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- Head -->
+<head>
+    <meta charset="utf-8" />
+    <title>{% block title %}Dashboard{% endblock %}</title>
+    <meta name="description" content="Dashboard" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="shortcut icon" href="/static/img/favicon.png" type="image/x-icon">
+    <!--Basic Styles-->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" />
+    <link id="bootstrap-rtl-link" href="" rel="stylesheet" />
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="/static/css/weather-icons.min.css" rel="stylesheet" />
+    <!--Fonts-->
+    <link href="/static/css/fonts.css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300" rel="stylesheet" type="text/css">
+    <!--Beyond styles-->
+    <link id="beyond-link" href="/static/css/beyond.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/demo.min.css" rel="stylesheet" />
+    <link href="/static/css/typicons.min.css" rel="stylesheet" />
+    <link href="/static/css/animate.min.css" rel="stylesheet" />
+    <link id="skin-link" href="" rel="stylesheet" type="text/css" />
+    <!--Skin Script: Place this script in head to load scripts for skins and rtl support-->
+    <script src="/static/js/skins.min.js"></script>
+</head>
+<!-- /Head -->
+<!-- Body -->
+<body>
+{% block container %}
+    <!-- Loading Container -->
+    <div class="loading-container">
+        <div class="loading-progress">
+            <div class="rotator">
+                <div class="rotator">
+                    <div class="rotator colored">
+                        <div class="rotator">
+                            <div class="rotator colored">
+                                <div class="rotator colored"></div>
+                                <div class="rotator"></div>
+                            </div>
+                            <div class="rotator colored"></div>
+                        </div>
+                        <div class="rotator"></div>
+                    </div>
+                    <div class="rotator"></div>
+                </div>
+                <div class="rotator"></div>
+            </div>
+            <div class="rotator"></div>
+        </div>
+    </div>
+    <!--  /Loading Container -->
+	
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="navbar-container">
+                <!-- Navbar Barnd -->
+                <div class="navbar-header pull-left">
+                    <a href="#" class="navbar-brand">
+						<img src="/static/img/logo.png" alt="" />Ops Admin
+                    </a>
+                </div>
+                <!-- /Navbar Barnd -->
+
+                <!-- Sidebar Collapse -->
+                <div class="sidebar-collapse" id="sidebar-collapse">
+                    <i class="collapse-icon fa fa-bars"></i>
+                </div>
+                <!-- /Sidebar Collapse -->
+				
+                <!-- Account Area and Settings --->
+                <div class="navbar-header pull-right">
+                    <div class="navbar-account">
+                        <ul class="account-area">
+                            <li>
+                                <a class=" dropdown-toggle" data-toggle="dropdown" title="Help" href="#">
+                                    <i class="icon fa fa-warning"></i>
+                                </a>                                
+                            </li>
+                            <li>
+                                <a class="wave in dropdown-toggle" data-toggle="dropdown" title="Help" href="#">
+                                    <i class="icon fa fa-envelope"></i>
+                                    <span class="badge">1</span>
+                                </a>
+                                <!--Messages Dropdown-->
+                                <ul class="pull-right dropdown-menu dropdown-arrow dropdown-messages">
+									<li>
+                                        <a href="#">
+                                            <img src="/static/img/avatars/adam-jansen.jpg" class="message-avatar" alt="Divyia Austin">
+                                            <div class="message">
+                                                <span class="message-sender">
+                                                    test
+                                                </span>
+                                                <span class="message-time">
+                                                    Friday, September 22
+                                                </span>
+                                                <span class="message-subject">
+                                                    test
+                                                </span>
+                                                <span class="message-body">
+                                                    暂没有开通
+                                                </span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <!--/Messages Dropdown-->
+                            </li>
+
+                            <li>
+                                <a class="dropdown-toggle" data-toggle="dropdown" title="Tasks" href="#">
+                                    <i class="icon fa fa-tasks"></i>
+                                    <span class="badge">1</span>
+                                </a>
+                                <!--Tasks Dropdown-->
+                                <ul class="pull-right dropdown-menu dropdown-tasks dropdown-arrow ">
+                                    <li class="dropdown-header bordered-darkorange">
+                                        <i class="fa fa-tasks"></i>
+                                        1 Tasks In Progress
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <div class="clearfix">
+                                                <span class="pull-left">暂时未开通此功能</span>
+                                                <span class="pull-right">65%</span>
+                                            </div>
+
+                                            <div class="progress progress-xs">
+                                                <div style="width:65%" class="progress-bar"></div>
+                                            </div>
+                                        </a>
+                                    </li>                                
+                                   
+                                    <li class="dropdown-footer">
+                                        <a href="#">
+                                            See All Tasks
+                                        </a>
+                                        <button class="btn btn-xs btn-default shiny darkorange icon-only pull-right"><i class="fa fa-check"></i></button>
+                                    </li>
+                                </ul>
+                                <!--/Tasks Dropdown-->
+                            </li>
+                            <li>
+                                <a class="login-area dropdown-toggle" data-toggle="dropdown">
+                                    <div class="avatar" title="用户配置">
+                                        <img src="/static/img/avatars/adam-jansen.jpg">
+                                    </div>
+                                    <section>
+                                        <h2><span class="profile">>>{{request.user}}<<</span></h2>
+                                    </section>
+                                </a>
+                                <!--Login Area Dropdown-->
+                                <ul class="pull-right dropdown-menu dropdown-arrow dropdown-login-area">
+                                    <li class="username"><a>{{request.user}}</a></li>
+                                    <!--li class="email"><a>***@test.com</a></li-->
+                                    <!--Avatar Area-->
+                                    <li>
+                                        <div class="avatar-area">
+                                            <img src="/static/img/avatars/adam-jansen.jpg" class="avatar">
+                                            <span class="caption">Change Photo</span>
+                                        </div>
+                                    </li>
+                                    <!--Avatar Area-->
+                                    <li class="edit">
+                                        <a href="{% url 'profileurl' %}" class="pull-left">Profile</a>
+                                        <a href="{% url 'changepasswordurl' %}" class="pull-right">更改密码</a>
+                                    </li>
+                                    <!--Theme Selector Area-->
+                                    <li class="theme-area">
+                                        <ul class="colorpicker" id="skin-changer">
+                                            <li><a class="colorpick-btn" href="#" style="background-color:#5DB2FF;" rel="/static/css/skins/blue.min.css"></a></li>
+                                            <li><a class="colorpick-btn" href="#" style="background-color:#2dc3e8;" rel="/static/css/skins/azure.min.css"></a></li>
+                                            <li><a class="colorpick-btn" href="#" style="background-color:#03B3B2;" rel="/static/css/skins/teal.min.css"></a></li>
+                                            <li><a class="colorpick-btn" href="#" style="background-color:#53a93f;" rel="/static/css/skins/green.min.css"></a></li>
+                                            <li><a class="colorpick-btn" href="#" style="background-color:#FF8F32;" rel="/static/css/skins/orange.min.css"></a></li>
+                                            <li><a class="colorpick-btn" href="#" style="background-color:#cc324b;" rel="/static/css/skins/pink.min.css"></a></li>
+                                            <li><a class="colorpick-btn" href="#" style="background-color:#AC193D;" rel="/static/css/skins/darkred.min.css"></a></li>
+                                            <li><a class="colorpick-btn" href="#" style="background-color:#8C0095;" rel="/static/css/skins/purple.min.css"></a></li>
+                                            <li><a class="colorpick-btn" href="#" style="background-color:#0072C6;" rel="/static/css/skins/darkblue.min.css"></a></li>
+                                            <li><a class="colorpick-btn" href="#" style="background-color:#585858;" rel="/static/css/skins/gray.min.css"></a></li>
+                                            <li><a class="colorpick-btn" href="#" style="background-color:#474544;" rel="/static/css/skins/black.min.css"></a></li>
+                                            <li><a class="colorpick-btn" href="#" style="background-color:#001940;" rel="/static/css/skins/deepblue.min.css"></a></li>
+                                        </ul>
+                                    </li>
+                                    <!--/Theme Selector Area-->
+                                    <li class="dropdown-footer">
+                                        <a href="{% url 'logouturl' %}">
+                                            Sign out
+                                        </a>
+                                    </li>
+                                </ul>
+                                <!--/Login Area Dropdown-->
+                            </li>
+                            <!-- /Account Area -->
+                            <!--Note: notice that setting div must start right after account area list.
+                            no space must be between these elements-->
+                            <!-- Settings -->
+                        </ul><div class="setting">
+                            <a id="btn-setting" title="Setting" href="#">
+                                <i class="icon glyphicon glyphicon-cog"></i>
+                            </a>
+                        </div><div class="setting-container">
+                            <label>
+                                <input type="checkbox" id="checkbox_fixednavbar">
+                                <span class="text">Fixed Navbar</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" id="checkbox_fixedsidebar">
+                                <span class="text">Fixed SideBar</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" id="checkbox_fixedbreadcrumbs">
+                                <span class="text">Fixed BreadCrumbs</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" id="checkbox_fixedheader">
+                                <span class="text">Fixed Header</span>
+                            </label>
+                        </div>
+                        <!-- Settings -->
+                    </div>
+                </div>
+                <!-- /Account Area and Settings -->
+            </div>
+        </div>
+    </div>
+    <!-- /Navbar -->
+    <!-- Main Container -->
+    <div class="main-container container-fluid">
+        <!-- Page Container -->
+        <div class="page-container">
+            <!-- Page Sidebar -->
+            <div class="page-sidebar" id="sidebar">
+                <!-- Page Sidebar Header-->
+                <div class="sidebar-header-wrapper">
+                    <input type="text" class="searchinput" />
+                    <i class="searchicon fa fa-search"></i>
+                    <div class="searchhelper">Search Reports, Charts, Emails or Notifications</div>
+                </div>
+                <!-- /Page Sidebar Header -->
+                <!-- Sidebar Menu -->
+                <ul class="nav sidebar-menu">
+                    <!--Dashboard-->
+                    <li class="{% if '/' = request.path %} active{% endif %}">
+                        <a href="{% url 'index' %}">
+                            <i class="menu-icon glyphicon glyphicon-home"></i>
+                            <span class="menu-text"> Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="{% if 'install' in request.path %} active open {% endif %}">
+                        <a href="#" class="menu-dropdown">
+                            <i class="menu-icon fa fa-table"></i>
+                            <span class="menu-text"> 装机管理 </span>
+                            <i class="menu-expand"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li class="{% if 'add_install' in request.path %} active {% endif %}"><a href="{% url 'add_install' %}"><span class="menu-text">添加安装</span></a>
+                            </li>
+                            <li class="{% if 'install_list' in request.path %} active {% endif %}"><a href="{% url 'install_list' %}"><span class="menu-text">待安装列表</span></a>
+                            </li>
+							<li class="{% if 'install_status' in request.path %} active {% endif %}"><a href="{% url 'install_status' %}"><span class="menu-text">安装进度</span></a>
+                            </li>
+							<li class="{% if 'install_init' in request.path %} active {% endif %}"><a href="{% url 'install_init' %}"><span class="menu-text">初始化</span></a>
+                            </li>
+                            <li class="{% if 'install_record' in request.path %} active {% endif %}"><a href="{% url 'install_record' %}"><span class="menu-text">安装记录</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                   
+                    <li class="{% if 'deploy' in request.path %} active open{% endif %}">
+                        <a href="#" class="menu-dropdown">
+                            <i class="menu-icon fa fa-desktop"></i>
+                            <span class="menu-text"> 部署管理 </span>
+                            <i class="menu-expand"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li class="{% if 'key_list' in request.path %} active {% endif %}"><a href="{% url 'key_list' %}"><span class="menu-text">Salt认证</span></a>
+                            </li>
+							<li class="{% if 'minions_status' in request.path %} active {% endif %}"><a href="{% url 'minions_status' %}"><span class="menu-text">Minions状态</span></a>
+                            </li>
+							<li class="{% if 'job_list' in request.path %} active {% endif %}"><a href="{% url 'job_list' %}"><span class="menu-text">jobs列表</span></a>
+                            </li>
+                            <li class="{% if 'module_deploy' in request.path %} active {% endif %}"><a href="{% url 'module_deploy' %}"><span class="menu-text">模块部署</span></a>
+                            </li>
+                            <li class="{% if 'remote_execution' in request.path %} active {% endif %}"><a href="{% url 'remote_execution' %}"><span class="menu-text">远程管理</span></a>
+                            </li>                           
+                        </ul>
+                    </li>
+                    <li class="{% if 'asset' in request.path %} active open{% endif %}">
+                        <a href="#" class="menu-dropdown">
+                            <i class="menu-icon fa fa-th"></i>
+                            <span class="menu-text"> 设备管理 </span>
+                            <i class="menu-expand"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li class="{% if 'host_list' in request.path %} active {% endif %}"><a href="{% url 'host_list' %}"><span class="menu-text">主机列表</span></a>
+                            </li>
+							<li class="{% if 'listhostgroups' in request.path %} active {% endif %}"><a href="{% url 'listhostgroups' %}"><span class="menu-text">主机分组</span></a>
+                            </li>
+                            <li class="{% if 'server_asset' in request.path %} active {% endif %}"><a href="{% url 'server_asset_list' %}"><span class="menu-text">服务器信息</span></a>
+                            </li>
+                            <li class="{% if 'device_list' in request.path %} active {% endif %}"><a href="{% url 'network_device_list' %}"><span class="menu-text">网络设备信息</span></a>
+                            </li>
+                            <li class="{% if 'idc_list' in request.path %} active {% endif %}"><a href="{% url 'idc_asset_list' %}"><span class="menu-text">数据中心信息</span></a>
+                            </li>
+                        </ul>
+                    </li>					
+					<li class="{% if 'config' in request.path %} active open{% endif %}">
+                        <a href="#" class="menu-dropdown">
+                            <i class="menu-icon fa fa-bolt"></i>
+                            <span class="menu-text"> 系统管理 </span>
+                            <i class="menu-expand"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li class="{% if 'config_api_add' in request.path %} active {% endif %}"><a href="{% url 'config_api_add' %}">添加API</a>
+                            </li>
+                            <li class="{% if 'config_api_list' in request.path %} active {% endif %}"><a href="{% url 'config_api_list' %}">API列表</a>
+                            </li>
+							<li class="{% if 'config_os_list' in request.path %} active {% endif %}"><a href="{% url 'config_os_list' %}">Cobbler Profiles</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="{% if 'accounts' in request.path %} active open {% endif %}">
+                        <a href="#" class="menu-dropdown">
+                            <i class="menu-icon fa fa-rocket"></i>
+                            <span class="menu-text"> 用户管理 </span>
+                            <i class="menu-expand"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li class="{% if 'user' in request.path %} active {% endif %}"><a href="{% url 'listuserurl' %}">用户管理</a>
+                            </li>
+                            <li class="{% if 'role' in request.path %} active {% endif %}"><a href="{% url 'listroleurl' %}">角色管理</a>
+                            </li>
+							<li class="{% if 'permission' in request.path %} active {% endif %}"><a href="{% url 'listpermissionurl' %}">权限管理</a>
+                            </li>
+                        </ul>
+                    </li>
+					<li class="{% if 'message' in request.path %} active open {% endif %}">
+                        <a href="#" class="menu-dropdown">
+                            <i class="menu-icon fa fa-windows"></i>
+                            <span class="menu-text"> 审计管理 </span>
+                            <i class="menu-expand"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li class="{% if 'mesg_list' in request.path %} active {% endif %}"><a href="{% url 'mesg_list' %}">日志列表</a>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                  
+                </ul>
+                <!-- /Sidebar Menu -->
+            </div>
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+			{% block content %}
+            <div class="page-content">
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">Home</a>
+                        </li>
+                        <li class="active">Dashboard</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                <!-- Page Header -->
+				<div class="page-header position-relative">
+                    <div class="header-title">
+                        <h1>
+                            Dashboard
+                        </h1>
+                    </div>
+                    <!--Header Buttons-->
+                    <div class="header-buttons">
+                        <a class="sidebar-toggler" href="#">
+                            <i class="fa fa-arrows-h"></i>
+                        </a>
+                        <a class="refresh" id="refresh-toggler" href="">
+                            <i class="glyphicon glyphicon-refresh"></i>
+                        </a>
+                        <a class="fullscreen" id="fullscreen-toggler" href="#">
+                            <i class="glyphicon glyphicon-fullscreen"></i>
+                        </a>
+                    </div>
+                    <!--Header Buttons End-->
+                </div>
+                <!-- /Page Header -->
+				<!-- Page Body -->
+
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                    <div class="databox radius-bordered databox-shadowed databox-graded">
+                                        <div class="databox-left  bg-themeprimary">
+                                            <div class="databox-piechart">
+                                                <div data-toggle="easypiechart" class="easyPieChart" data-barcolor="#fff" data-linecap="butt" data-percent="50" data-animate="500" data-linewidth="3" data-size="47" data-trackcolor="rgba(255,255,255,0.1)"><span class="white font-90">50%</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="databox-right">
+                                            <span class="databox-number  themeprimary">{{ host_up_count }}</span>
+                                            <div class="databox-text darkgray">在线主机</div>
+                                            <div class="databox-stat themeprimary radius-bordered">
+                                                <i class="stat-icon icon-lg fa fa-tasks"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                    <div class="databox radius-bordered databox-shadowed databox-graded">
+                                        <div class="databox-left bg-themethirdcolor">
+                                            <div class="databox-piechart">
+                                                <div data-toggle="easypiechart" class="easyPieChart" data-barcolor="#fff" data-linecap="butt" data-percent="15" data-animate="500" data-linewidth="3" data-size="47" data-trackcolor="rgba(255,255,255,0.2)"><span class="white font-90">15%</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="databox-right">
+                                            <span class="databox-number themethirdcolor">{{ host_nosync_count }}</span>
+                                            <div class="databox-text darkgray">未同步的主机</div>
+                                            <div class="databox-stat themethirdcolor radius-bordered">
+                                                <i class="stat-icon  icon-lg fa fa-envelope-o"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                    <div class="databox radius-bordered databox-shadowed databox-graded">
+                                        <div class="databox-left bg-themesecondary">
+                                            <div class="databox-piechart">
+                                                <div id="users-pie" data-toggle="easypiechart" class="easyPieChart" data-barcolor="#fff" data-linecap="butt" data-percent="76" data-animate="500" data-linewidth="3" data-size="47" data-trackcolor="rgba(255,255,255,0.1)"><span class="white font-90">76%</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="databox-right">
+                                            <span class="databox-number themesecondary">{{ host_down_count }}</span>
+                                            <div class="databox-text darkgray">Down的服务器</div>
+                                            <div class="databox-state themesecondary">
+                                                <i class="fa fa-check"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+							</div>
+					</div>
+					<!-- task user message-->
+                    </div>
+					<div class="row">
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                            <div class="databox databox-xxlg databox-vertical databox-inverted">
+                                <div class="databox-top bg-whitesmoke no-padding">
+                                    <div class="databox-row row-2 bg-orange no-padding">
+                                        <div class="databox-cell cell-1 text-align-center no-padding padding-top-5">
+                                            <span class="databox-number white"><i class="fa fa-bar-chart-o no-margin"></i></span>
+                                        </div>
+                                        <div class="databox-cell cell-8 no-padding padding-top-5 text-align-left">
+                                            <span class="databox-number white">PAGE VIEWS</span>
+                                        </div>
+                                        <div class="databox-cell cell-3 text-align-right padding-10">
+                                            <span class="databox-text white">13 DECEMBER</span>
+                                        </div>
+                                    </div>
+                                    <div class="databox-row row-4">
+                                        <div class="databox-cell cell-6 no-padding padding-10 padding-left-20 text-align-left">
+                                            <span class="databox-number orange no-margin">534,908</span>
+                                            <span class="databox-text sky no-margin">OVERAL VIEWS</span>
+                                        </div>
+                                        <div class="databox-cell cell-2 no-padding padding-10 text-align-left">
+                                            <span class="databox-number orange no-margin">4,129</span>
+                                            <span class="databox-text darkgray no-margin">THIS WEEK</span>
+                                        </div>
+                                        <div class="databox-cell cell-2 no-padding padding-10 text-align-left">
+                                            <span class="databox-number orange no-margin">329</span>
+                                            <span class="databox-text darkgray no-margin">YESTERDAY</span>
+                                        </div>
+                                        <div class="databox-cell cell-2 no-padding padding-10 text-align-left">
+                                            <span class="databox-number orange no-margin">104</span>
+                                            <span class="databox-text darkgray no-margin">TODAY</span>
+                                        </div>
+                                    </div>
+                                    <div class="databox-row row-6 no-padding">
+                                        <div class="databox-sparkline">
+                                            <span data-sparkline="line" data-height="126px" data-width="100%" data-fillcolor="#37c2e2" data-linecolor="#37c2e2"
+                                                  data-spotcolor="#fafafa" data-minspotcolor="#fafafa" data-maxspotcolor="#ffce55"
+                                                  data-highlightspotcolor="#f5f5f5 " data-highlightlinecolor="#f5f5f5"
+                                                  data-linewidth="2" data-spotradius="0">
+                                                5,7,6,5,9,4,3,7,2
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="databox-bottom bg-sky no-padding">
+                                    <div class="databox-cell cell-2 text-align-center no-padding padding-top-5">
+                                        <span class="databox-header white">Mon</span>
+                                    </div>
+                                    <div class="databox-cell cell-2 text-align-center no-padding padding-top-5">
+                                        <span class="databox-header white">Tues</span>
+                                    </div>
+                                    <div class="databox-cell cell-2 text-align-center no-padding padding-top-5">
+                                        <span class="databox-header white">Wed</span>
+                                    </div>
+                                    <div class="databox-cell cell-2 text-align-center no-padding padding-top-5">
+                                        <span class="databox-header white">Thu</span>
+                                    </div>
+                                    <div class="databox-cell cell-2 text-align-center no-padding padding-top-5">
+                                        <span class="databox-header white">Fri</span>
+                                    </div>
+                                    <div class="databox-cell cell-2 text-align-center no-padding padding-top-5">
+                                        <span class="databox-header white">Sat</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                            <div class="databox databox-xxlg databox-vertical databox-shadowed bg-white radius-bordered padding-5">
+                                <div class="databox-top">
+                                    <div class="databox-row row-12">
+                                        <div class="databox-cell cell-3 text-center">
+                                            <div class="databox-number number-xxlg sonic-silver">164</div>
+                                            <div class="databox-text storm-cloud">online</div>
+                                        </div>
+                                        <div class="databox-cell cell-9 text-align-center">
+                                            <div class="databox-row row-6 text-left">
+                                                <span class="badge badge-palegreen badge-empty margin-left-5"></span>
+                                                <span class="databox-inlinetext uppercase darkgray margin-left-5">NEW</span>
+                                                <span class="badge badge-yellow badge-empty margin-left-5"></span>
+                                                <span class="databox-inlinetext uppercase darkgray margin-left-5">RETURNING</span>
+                                            </div>
+                                            <div class="databox-row row-6">
+                                                <div class="progress bg-yellow progress-no-radius">
+                                                    <div class="progress-bar progress-bar-palegreen" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 78%">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="databox-bottom">
+                                    <div class="databox-row row-12">
+                                        <div class="databox-cell cell-7 text-center  padding-5">
+                                            <div id="dashboard-pie-chart-sources" class="chart"></div>
+                                        </div>
+                                        <div class="databox-cell cell-5 text-center no-padding-left padding-bottom-30">
+                                            <div class="databox-row row-2 bordered-bottom bordered-ivory padding-10">
+                                                <span class="databox-text sonic-silver pull-left no-margin">Type</span>
+                                                <span class="databox-text sonic-silver pull-right no-margin uppercase">PCT</span>
+                                            </div>
+                                            <div class="databox-row row-2 bordered-bottom bordered-ivory padding-10">
+                                                <span class="badge badge-blue badge-empty pull-left margin-5"></span>
+                                                <span class="databox-text darkgray pull-left no-margin hidden-xs">FEED</span>
+                                                <span class="databox-text darkgray pull-right no-margin uppercase">46%</span>
+                                            </div>
+                                            <div class="databox-row row-2 bordered-bottom bordered-ivory padding-10">
+                                                <span class="badge badge-orange badge-empty pull-left margin-5"></span>
+                                                <span class="databox-text darkgray pull-left no-margin hidden-xs">PREFERRAL</span>
+                                                <span class="databox-text darkgray pull-right no-margin uppercase">21%</span>
+                                            </div>
+                                            <div class="databox-row row-2 bordered-bottom bordered-ivory padding-10">
+                                                <span class="badge badge-pink badge-empty pull-left margin-5"></span>
+                                                <span class="databox-text darkgray pull-left no-margin hidden-xs">DIRECT</span>
+                                                <span class="databox-text darkgray pull-right no-margin uppercase">12%</span>
+                                            </div>
+                                            <div class="databox-row row-2 bordered-bottom bordered-ivory padding-10">
+                                                <span class="badge badge-palegreen badge-empty pull-left margin-5"></span>
+                                                <span class="databox-text darkgray pull-left no-margin hidden-xs">EMAIL</span>
+                                                <span class="databox-text darkgray pull-right no-margin uppercase">11%</span>
+                                            </div>
+                                            <div class="databox-row row-2 padding-10">
+                                                <span class="badge badge-yellow badge-empty pull-left margin-5"></span>
+                                                <span class="databox-text darkgray pull-left no-margin hidden-xs">ORGANIC</span>
+                                                <span class="databox-text darkgray pull-right no-margin uppercase">10%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> <!-- Remaining Days: 109-->
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="dashboard-box">
+                                        <div class="box-header">
+                                            <div class="deadline">
+                                                Remaining Days: 109
+                                            </div>
+                                        </div>
+                                        <div class="box-progress">
+                                            <div class="progress-handle">day 30</div>
+                                            <div class="progress progress-xs progress-no-radius bg-whitesmoke">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="box-tabbs">
+                                            <div class="tabbable">
+                                                <ul class="nav nav-tabs tabs-flat  nav-justified" id="myTab11">
+                                                    <li class="active">
+                                                        <a data-toggle="tab" href="#visits">
+                                                            Visits
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a data-toggle="tab" href="#realtime">
+                                                            Real-Time
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a data-toggle="tab" id="contacttab" href="#bandwidth">
+                                                            Bandwidth
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a data-toggle="tab" href="#sales">
+                                                            Sales
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                                <div class="tab-content tabs-flat no-padding">
+                                                    <div id="visits" class="tab-pane active animated fadeInUp">
+                                                        <div class="row">
+                                                            <div class="col-lg-12 chart-container">
+                                                                <div id="dashboard-chart-visits" class="chart chart-lg no-margin"></div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div id="realtime" class="tab-pane padding-left-5 padding-right-10 animated fadeInUp">
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div id="dashboard-chart-realtime" class="chart chart-lg no-margin" style="width:100%"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="bandwidth" class="tab-pane padding-10 animated fadeInUp">
+                                                        <div class="databox-sparkline bg-themeprimary">
+                                                            <span id="dashboard-bandwidth-chart" data-sparkline="compositeline" data-height="250px" data-width="100%" data-linecolor="#fff" data-secondlinecolor="#eee"
+                                                                  data-fillcolor="rgba(255,255,255,.1)" data-secondfillcolor="rgba(255,255,255,.25)"
+                                                                  data-spotradius="0"
+                                                                  data-spotcolor="#fafafa" data-minspotcolor="#fafafa" data-maxspotcolor="#ffce55"
+                                                                  data-highlightspotcolor="#fff" data-highlightlinecolor="#fff"
+                                                                  data-linewidth="2" data-secondlinewidth="2"
+                                                                  data-composite="500, 400, 100, 450, 300, 200, 100, 200">
+                                                                300,300,400,300,200,300,300,200
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div id="sales" class="tab-pane animated fadeInUp no-padding-bottom" style="padding:20px 20px 0 20px;">
+                                                        <div class="row">
+                                                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                                                <div class="databox databox-xlg databox-vertical databox-inverted databox-shadowed">
+                                                                    <div class="databox-top">
+                                                                        <div class="databox-sparkline">
+                                                                            <span data-sparkline="line" data-height="125px" data-width="100%" data-fillcolor="false" data-linecolor="themesecondary"
+                                                                                  data-spotcolor="#fafafa" data-minspotcolor="#fafafa" data-maxspotcolor="#ffce55"
+                                                                                  data-highlightspotcolor="#ffce55" data-highlightlinecolor="#ffce55"
+                                                                                  data-linewidth="1.5" data-spotradius="2">
+                                                                                1,2,4,3,5,6,8,7,11,14,11,12
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="databox-bottom no-padding text-align-center">
+                                                                        <span class="databox-number lightcarbon no-margin">224</span>
+                                                                        <span class="databox-text lightcarbon no-margin">Sale Unit / Hour</span>
+
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                                                <div class="databox databox-xlg databox-vertical databox-inverted databox-shadowed">
+                                                                    <div class="databox-top">
+                                                                        <div class="databox-sparkline">
+                                                                            <span data-sparkline="line" data-height="125px" data-width="100%" data-fillcolor="false" data-linecolor="themefourthcolor"
+                                                                                  data-spotcolor="#fafafa" data-minspotcolor="#fafafa" data-maxspotcolor="#8cc474"
+                                                                                  data-highlightspotcolor="#8cc474" data-highlightlinecolor="#8cc474"
+                                                                                  data-linewidth="1.5" data-spotradius="2">
+                                                                                100,208,450,298,450,776,234,680,1100,1400,1000,1200
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="databox-bottom no-padding text-align-center">
+                                                                        <span class="databox-number lightcarbon no-margin">7063$</span>
+                                                                        <span class="databox-text lightcarbon no-margin">Income / Hour</span>
+
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                                                <div class="databox databox-xlg databox-vertical databox-inverted databox-shadowed">
+                                                                    <div class="databox-top">
+                                                                        <div class="databox-piechart">
+                                                                            <div data-toggle="easypiechart" class="easyPieChart block-center"
+                                                                                 data-barcolor="themeprimary" data-linecap="butt" data-percent="80" data-animate="500"
+                                                                                 data-linewidth="8" data-size="125" data-trackcolor="#eee">
+                                                                                <span class="font-200"><i class="fa fa-gift themeprimary"></i></span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="databox-bottom no-padding text-align-center">
+                                                                        <span class="databox-number lightcarbon no-margin">9</span>
+                                                                        <span class="databox-text lightcarbon no-margin">NEW ORDERS</span>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                                                <div class="databox databox-xlg databox-vertical databox-inverted  databox-shadowed">
+                                                                    <div class="databox-top">
+                                                                        <div class="databox-piechart">
+                                                                            <div data-toggle="easypiechart" class="easyPieChart block-center"
+                                                                                 data-barcolor="themethirdcolor" data-linecap="butt" data-percent="40" data-animate="500"
+                                                                                 data-linewidth="8" data-size="125" data-trackcolor="#eee">
+                                                                                <span class="white font-200"><i class="fa fa-tags themethirdcolor"></i></span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="databox-bottom no-padding text-align-center">
+                                                                        <span class="databox-number lightcarbon no-margin">11</span>
+                                                                        <span class="databox-text lightcarbon no-margin">NEW TICKETS</span>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <!-- /Page Body -->
+            </div>
+            <!-- /Page Content -->
+			{% endblock %}
+        </div>
+        <!-- /Page Container -->
+        <!-- Main Container -->
+
+    </div>
+{% endblock %}
+    <!--Basic Scripts-->
+    <script src="/static/js/jquery-2.0.3.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+
+    <!--Beyond Scripts-->
+    <script src="/static/js/beyond.min.js"></script>
+
+
+    <!--Page Related Scripts-->
+    <!--Sparkline Charts Needed Scripts-->
+	{% block scripts %}
+	{% endblock %}
+    <script src="/static/js/charts/sparkline/jquery.sparkline.js"></script>
+    <script src="/static/js/charts/sparkline/sparkline-init.js"></script>
+
+    <!--Easy Pie Charts Needed Scripts-->
+    <script src="/static/js/charts/easypiechart/jquery.easypiechart.js"></script>
+    <script src="/static/js/charts/easypiechart/easypiechart-init.js"></script>
+
+    <!--Flot Charts Needed Scripts-->
+    <script src="/static/js/charts/flot/jquery.flot.js"></script>
+    <script src="/static/js/charts/flot/jquery.flot.resize.js"></script>
+    <script src="/static/js/charts/flot/jquery.flot.pie.js"></script>
+    <script src="/static/js/charts/flot/jquery.flot.tooltip.js"></script>
+    <script src="/static/js/charts/flot/jquery.flot.orderBars.js"></script> 
+	<!--salt execution select Needed Scripts-->
+	<script src="/static/js/select2/select2.js"></script>
+    <script>
+        // If you want to draw your charts with Theme colors you must run initiating charts after that current skin is loaded
+        $(window).bind("load", function () {
+
+            /*Sets Themed Colors Based on Themes*/
+            themeprimary = getThemeColorFromCss('themeprimary');
+            themesecondary = getThemeColorFromCss('themesecondary');
+            themethirdcolor = getThemeColorFromCss('themethirdcolor');
+            themefourthcolor = getThemeColorFromCss('themefourthcolor');
+            themefifthcolor = getThemeColorFromCss('themefifthcolor');
+
+            //Sets The Hidden Chart Width
+            $('#dashboard-bandwidth-chart')
+                .data('width', $('.box-tabbs')
+                    .width() - 20);
+
+            //-------------------------Visitor Sources Pie Chart----------------------------------------//
+            var data = [
+                {
+                    data: [[1, 21]],
+                    color: '#fb6e52'
+                },
+                {
+                    data: [[1, 12]],
+                    color: '#e75b8d'
+                },
+                {
+                    data: [[1, 11]],
+                    color: '#a0d468'
+                },
+                {
+                    data: [[1, 10]],
+                    color: '#ffce55'
+                },
+                {
+                    data: [[1, 46]],
+                    color: '#5db2ff'
+                }
+            ];
+            var placeholder = $("#dashboard-pie-chart-sources");
+            placeholder.unbind();
+
+            $.plot(placeholder, data, {
+                series: {
+                    pie: {
+                        innerRadius: 0.45,
+                        show: true,
+                        stroke: {
+                            width: 4
+                        }
+                    }
+                }
+            });
+
+            //------------------------------Visit Chart------------------------------------------------//
+            var data2 = [{
+                color: themesecondary,
+                label: "Direct Visits",
+                data: [[3, 2], [4, 5], [5, 4], [6, 11], [7, 12], [8, 11], [9, 8], [10, 14], [11, 12], [12, 16], [13, 9],
+                [14, 10], [15, 14], [16, 15], [17, 9]],
+
+                lines: {
+                    show: true,
+                    fill: true,
+                    lineWidth: .1,
+                    fillColor: {
+                        colors: [{
+                            opacity: 0
+                        }, {
+                            opacity: 0.4
+                        }]
+                    }
+                },
+                points: {
+                    show: false
+                },
+                shadowSize: 0
+            },
+                {
+                    color: themeprimary,
+                    label: "Referral Visits",
+                    data: [[3, 10], [4, 13], [5, 12], [6, 16], [7, 19], [8, 19], [9, 24], [10, 19], [11, 18], [12, 21], [13, 17],
+                    [14, 14], [15, 12], [16, 14], [17, 15]],
+                    bars: {
+                        order: 1,
+                        show: true,
+                        borderWidth: 0,
+                        barWidth: 0.4,
+                        lineWidth: .5,
+                        fillColor: {
+                            colors: [{
+                                opacity: 0.4
+                            }, {
+                                opacity: 1
+                            }]
+                        }
+                    }
+                },
+                {
+                    color: themethirdcolor,
+                    label: "Search Engines",
+                    data: [[3, 14], [4, 11], [5, 10], [6, 9], [7, 5], [8, 8], [9, 5], [10, 6], [11, 4], [12, 7], [13, 4],
+                    [14, 3], [15, 4], [16, 6], [17, 4]],
+                    lines: {
+                        show: true,
+                        fill: false,
+                        fillColor: {
+                            colors: [{
+                                opacity: 0.3
+                            }, {
+                                opacity: 0
+                            }]
+                        }
+                    },
+                    points: {
+                        show: true
+                    }
+                }
+            ];
+            var options = {
+                legend: {
+                    show: false
+                },
+                xaxis: {
+                    tickDecimals: 0,
+                    color: '#f3f3f3'
+                },
+                yaxis: {
+                    min: 0,
+                    color: '#f3f3f3',
+                    tickFormatter: function (val, axis) {
+                        return "";
+                    },
+                },
+                grid: {
+                    hoverable: true,
+                    clickable: false,
+                    borderWidth: 0,
+                    aboveData: false,
+                    color: '#fbfbfb'
+
+                },
+                tooltip: true,
+                tooltipOpts: {
+                    defaultTheme: false,
+                    content: " <b>%x May</b> , <b>%s</b> : <span>%y</span>",
+                }
+            };
+            var placeholder = $("#dashboard-chart-visits");
+            var plot = $.plot(placeholder, data2, options);
+
+            //------------------------------Real-Time Chart-------------------------------------------//
+            var data = [],
+                totalPoints = 300;
+
+            function getRandomData() {
+
+                if (data.length > 0)
+                    data = data.slice(1);
+
+                // Do a random walk
+
+                while (data.length < totalPoints) {
+
+                    var prev = data.length > 0 ? data[data.length - 1] : 50,
+                        y = prev + Math.random() * 10 - 5;
+
+                    if (y < 0) {
+                        y = 0;
+                    } else if (y > 100) {
+                        y = 100;
+                    }
+
+                    data.push(y);
+                }
+
+                // Zip the generated y values with the x values
+
+                var res = [];
+                for (var i = 0; i < data.length; ++i) {
+                    res.push([i, data[i]]);
+                }
+
+                return res;
+            }
+            // Set up the control widget
+            var updateInterval = 100;
+            var plot = $.plot("#dashboard-chart-realtime", [getRandomData()], {
+                yaxis: {
+                    color: '#f3f3f3',
+                    min: 0,
+                    max: 100,
+                    tickFormatter: function (val, axis) {
+                        return "";
+                    }
+                },
+                xaxis: {
+                    color: '#f3f3f3',
+                    min: 0,
+                    max: 100,
+                    tickFormatter: function (val, axis) {
+                        return "";
+                    }
+                },
+                colors: [themeprimary],
+                series: {
+                    lines: {
+                        lineWidth: 0,
+                        fill: true,
+                        fillColor: {
+                            colors: [{
+                                opacity: 0.5
+                            }, {
+                                opacity: 0
+                            }]
+                        },
+                        steps: false
+                    },
+                    shadowSize: 0
+                },
+                grid: {
+                    hoverable: true,
+                    clickable: false,
+                    borderWidth: 0,
+                    aboveData: false
+                }
+            });
+
+            function update() {
+
+                plot.setData([getRandomData()]);
+
+                plot.draw();
+                setTimeout(update, updateInterval);
+            }
+            update();
+
+
+            //-------------------------Initiates Easy Pie Chart instances in page--------------------//
+            InitiateEasyPieChart.init();
+
+            //-------------------------Initiates Sparkline Chart instances in page------------------//
+            InitiateSparklineCharts.init();
+        });
+
+    </script>
+    <!--Google Analytics::Demo Only-->
+    <!--script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '/static/js/analytics.js', 'ga');
+
+        ga('create', 'UA-52103994-1', 'auto');
+        ga('send', 'pageview');
+
+    </script-->
+
+<!-- 刷新进度条-->
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#id_pv_type").change(function(){
+    $("#phipmi").toggle();
+  });
+});
+</script>
+<!--隐藏菜单栏-->
+<script>
+	$(document).ready(function () {
+		var data-toggle='#phipmi';
+		$('#id_pv_type').on('change', function () {
+			var $target = $($(this).attr('data-toggle'));
+			// Show or hide the additional fields
+			// They will or will not be validated based on their visibilities
+			$target.toggle();                
+		});
+
+
+
+	});
+</script>
+<script>
+$("#e2").select2({
+            placeholder: "Select a State",
+            allowClear: true
+        });
+setInterval(function() {
+    $("#content").load(location.href+" #content>*","");
+}, 10000);
+</script>
+</body>
+<!--  /Body -->
+</html>

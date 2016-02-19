@@ -1,0 +1,113 @@
+{% extends "index.html" %}
+{% block title %}OPSA-grains{% endblock %}
+{% block css %}
+<!-- DataTables-->
+<link rel="stylesheet" href="/static/plugins/dataTables/css/dataTables.css">
+
+{% endblock %}
+{% block content %}
+			<div class="page-content">
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">Dashboard</a>
+                        </li>
+						<li class="active"><a href="{% url 'host_list' %}" >Minions</a></li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                <!-- Page Header -->
+				<div class="page-header position-relative">
+                    <div class="header-title">
+                        <h1>
+                            Grains列表
+                        </h1>
+                    </div>
+                    <!--Header Buttons-->
+                    <div class="header-buttons">
+                        <a class="sidebar-toggler" href="#">
+                            <i class="fa fa-arrows-h"></i>
+                        </a>
+                        <a class="refresh" id="refresh-toggler" href="">
+                            <i class="glyphicon glyphicon-refresh"></i>
+                        </a>
+                        <a class="fullscreen" id="fullscreen-toggler" href="#">
+                            <i class="glyphicon glyphicon-fullscreen"></i>
+                        </a>
+                    </div>
+                    <!--Header Buttons End-->
+                </div>
+                <!-- /Page Header -->
+				
+       <div class="row">
+            <div class="col-md-12">
+                 <div class="panel panel-default">
+                      <div class="panel-body">
+					  <div>
+						  <a onclick="history.back();" class="btn btn-info btn-sm" role="button">返回</a>
+						  <!--form class="form-search pull-right">
+							  <input type="text" class="input-medium search-query">
+							  <button type="submit" class="btn">Search</button>
+						  </form-->
+					  </div>
+                           {% if all_grains %}
+						   <h2 class="primary">{{ hostname }} Grains</h2>
+                           <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                               <thead>
+                                   <tr>
+                                      <th>类型</th>  
+									  <th>值</th>  
+                                   </tr>
+                               </thead>
+                               
+                               <tbody>
+                               {% for key,value in all_grains.items %}
+                                   <tr>
+									  {% if key == 'ip_interfaces' or key == 'hwaddr_interfaces' %}
+                                      <td>{{ key }}</td>
+									  <td>{% for ip_key,ip_value in value.items %}
+											{{ ip_key }}:
+											{% for ip in ip_value %}
+												{{ ip }}
+											{% endfor %}<br>  
+										  {% endfor %}
+									  </td>
+									  {% elif key == "ipv4" or key == "pythonpath" or key == "ipv6" or key == "cpu_flags" or key == "fqdn_ip6" or key == "fqdn_ip4" %}
+									  <td>{{ key }}</td>
+									  <td>{% for ip_value in value %}
+											{{ ip_value }};											
+										  {% endfor %}
+									  </td>
+									  {% elif key == "gpus" %}
+									  <td>{{ key }}</td>
+									  
+									  <td>
+									   {% for value_2 in value %}
+											{% for key_1,value_1 in value_2.items %}
+												{{ key_1 }}:{{ value_1 }};											
+											{% endfor %}
+									   {% endfor %}
+									  </td>
+									  {% else %}	
+									  <td>{{ key }}</td>
+									  <td>{{ value }}</td>
+									  {% endif %}
+								   </tr>
+                               {% endfor %}
+                               </tbody>
+                            </table>
+                           {% endif %}
+                                 <div class="col-xs-6">
+                                      <div class="dataTables_paginate paging_simple_numbers" id="exmaple_paginate">
+                                           <a onclick="history.back();" class="btn btn-info btn-sm" role="button">返回</a>
+                                      </div>
+                                 </div>
+                           </div> <!--row end-->
+                         </div>
+                     </div>
+                 </div>
+             </div>
+      	<!--row end-->
+{% endblock %}

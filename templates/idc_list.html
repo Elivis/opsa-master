@@ -1,0 +1,94 @@
+{% extends "index.html" %}
+{% block title %}OPSA-idclist{% endblock %}
+{% block css %}
+<!-- DataTables-->
+<link rel="stylesheet" href="/static/plugins/dataTables/css/dataTables.css">
+{% endblock %}
+{% block content %}
+			<div class="page-content">
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">Dashboard</a>
+                        </li>
+                        <li class="active">设备管理</li>
+						<li class="active">数据中心</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                <!-- Page Header -->
+				<div class="page-header position-relative">
+                    <div class="header-title">
+                        <h1>
+                            数据中心
+                        </h1>
+                    </div>
+                    <!--Header Buttons-->
+                    <div class="header-buttons">
+                        <a class="sidebar-toggler" href="#">
+                            <i class="fa fa-arrows-h"></i>
+                        </a>
+                        <a class="refresh" id="refresh-toggler" href="">
+                            <i class="glyphicon glyphicon-refresh"></i>
+                        </a>
+                        <a class="fullscreen" id="fullscreen-toggler" href="#">
+                            <i class="glyphicon glyphicon-fullscreen"></i>
+                        </a>
+                    </div>
+                    <!--Header Buttons End-->
+                </div>
+                <!-- /Page Header -->
+       <div class="row">
+            <div class="col-md-12">
+                 <div class="panel panel-default">
+                      <div class="panel-body">
+                           {% if all_idc_list %}
+                           <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                               <thead>
+                                   <tr>
+                                      <th>No.</th>
+									  <th>ID</th>
+                                      <th>机房名称</th>
+                                      <th>机房类型</th>
+                                      <th>机房地址</th>
+                                      <th>到期时间</th>
+                                      <th>机房联系电话</th>
+                                      <th>备注</th>
+                                   </tr>
+                               </thead>
+                               
+                               <tbody>
+                               {% for each_idc in all_idc_list %}
+                                   <tr>
+                                      <td>{{ forloop.counter }}</td>
+									  <td>{{ each_idc.id }}</td>
+                                      <td>{{ each_idc.idc_name }}</td>
+                                      <td>{{ each_idc.idc_type }}</td>
+                                      <td>{{ each_idc.idc_location }}</td>
+                                      <td>{{ each_idc.contract_date }}</td>
+                                      <td>{{ each_idc.idc_contacts }}</td>
+                                      <td>{{ each_idc.remark }}</td>
+                                   </tr>
+                               {% endfor %}
+                               </tbody>
+                            </table>
+                           {% endif %}
+                            <div class="row">
+                                 <div class="col-xs-6">
+                                       <div class="dataTables_info" id="example_info" role="alert" aria-live="polite" aria-relevant="all"></div>
+                                 </div>
+                                 <div class="col-xs-6">
+                                      <div class="dataTables_paginate paging_simple_numbers" id="exmaple_paginate">
+                                           <a href="{% url 'add_idc' %}" class="btn btn-info btn-sm" role="button">添加</a>
+                                      </div>
+                                 </div>
+                           </div> <!--row end-->
+                         </div>
+                     </div>
+                 </div>
+             </div>
+      	<!--row end-->
+
+{% endblock %}

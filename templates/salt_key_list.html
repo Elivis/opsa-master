@@ -1,0 +1,159 @@
+{% extends "index.html" %}
+{% block title %}OPSA-key{% endblock %}
+{% block css %}
+<!-- DataTables-->
+<link rel="stylesheet" href="/static/plugins/dataTables/css/dataTables.css">
+{% endblock %}
+{% block content %}
+			<div class="page-content">
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">Dashboard</a>
+                        </li>
+                        <li class="active">部署管理</li>
+						<li class="active">KEY认证管理</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                <!-- Page Header -->
+				<div class="page-header position-relative">
+                    <div class="header-title">
+                        <h1>
+                            KEY认证管理
+                        </h1>
+                    </div>
+                    <!--Header Buttons-->
+                    <div class="header-buttons">
+                        <a class="sidebar-toggler" href="#">
+                            <i class="fa fa-arrows-h"></i>
+                        </a>
+                        <a class="refresh" id="refresh-toggler" href="">
+                            <i class="glyphicon glyphicon-refresh"></i>
+                        </a>
+                        <a class="fullscreen" id="fullscreen-toggler" href="#">
+                            <i class="glyphicon glyphicon-fullscreen"></i>
+                        </a>
+                    </div>
+                    <!--Header Buttons End-->
+                </div>
+                <!-- /Page Header -->
+
+       <div class="row">
+            <div class="col-md-12">
+                 <div class="panel panel-default">
+                      <div class="panel-body">
+                           <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                               <tbody>
+                                   <td class="info">所有salt-key列表</td>
+                               </tbody>
+                           </table>
+                           <h2 class="primary">{{ minions_pre_count }}个等待确认</h2>
+                           <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                               <thead>
+                                   <tr class="info">
+									  <th>ID</th>
+                                      <th>Minion</th>
+									  <th>接受</th> 
+									  <th>拒绝</th> 
+								   </tr>
+                               </thead>
+							   <tbody>
+                               {% for each_pre in all_minions_pre %}
+								<tr>
+								   <td>{{ forloop.counter }}</td>
+                                   <td>{{ each_pre }}</td>
+                                   <td width="180"><a href="/deploy/key_accept/?node_name={{ each_pre }}&what=accept" style="color:CornflowerBlue;font-weight:bold"><i class="fa fa-check-square-o"></i> 允许</a></td>
+								   <td width="180"><a href="/deploy/key_accept/?node_name={{ each_pre }}&what=reject" style="color:red;font-weight:bold"onclick="return confirm('是否确认拒绝？')"><i class="fa fa-minus-square"></i> 拒绝</a></td>
+                                </tr>
+							   {% endfor %}
+                               </tbody>
+                           </table>
+						    <h2 class="warning">{{ minions_rej_count }}Reject</h2>
+                           <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                               <thead>
+                                   <tr class="warning">
+									  <th>ID</th>
+                                      <th>Minion</th>
+									  <th>删除KEY</th> 
+									  <th>Fingerprint</th>
+								   </tr>
+                               </thead>
+							   <tbody>
+                               {% for each_rej in all_minions_rej %}
+								   <tr>
+								   <td>{{ forloop.counter }}</td>
+                                   <td>{{ each_rej }}</td>
+                                   <td width="180"><a href="javascript:void(0)" onclick="dodel('{{ each_rej }}')" style="color:white" class="btn btn-danger btn-sm" data-toggle="modal" role="button" onclick="return confirm('是否确认删除？')"><i class="fa fa-trash-o"></i>删除</a></td> 
+                                   <td></td>
+								   </tr>
+                               {% endfor %}
+                               </tbody>
+                           </table>
+                           <h2 class="green">{{ minions_count }} accepted minions.</h2>
+                           <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                               <thead>
+                                   <tr class="success">									  
+									  <th>ID</th>
+                                      <th>Minion</th>
+									  <th>删除KEY</th> 
+									  <th>Fingerprint</th>                                   </tr>
+                               </thead>
+							   <tbody>
+                               {% for each_minion in all_minions %}
+                                  <tr>
+								   <td>{{ forloop.counter }}</td>
+                                   <td>{{ each_minion }}</td>								   
+                                   <td width="180"><a href="javascript:void(0)" onclick="dodel('{{ each_minion }}')" style="color:white" class="btn btn-danger btn-sm" data-toggle="modal" role="button" ><i class="fa fa-trash-o"></i>删除</a></td> 
+                                   <td></td>
+								  </tr>
+                               {% endfor %}
+                               </tbody>
+                           </table>
+                           <div class="row">
+                                 <div class="col-xs-6">
+                                       <div class="dataTables_info" id="example_info" role="alert" aria-live="polite" aria-relevant="all"></div>
+                                 </div>
+                                 <div class="col-xs-6">
+                                      <div class="dataTables_paginate paging_simple_numbers" id="exmaple_paginate">
+                                      </div>
+                                 </div>
+								 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+	 <div class="widget-header bg-blue">
+		<button type="button" class="close" 
+		   data-dismiss="modal" aria-hidden="true">
+			  &times;
+		</button>
+		<span class="widget-caption">确认框</span>
+	 </div>
+	 <div class="modal-body">
+		确认删除？（同时删除主机信息）
+	 </div>
+	 <div class="widget-header bg-blue">
+		<button type="button" class="btn btn-default" 
+		   data-dismiss="modal">取消
+		</button>
+		<a href="/deploy/key_delete/?node_name=###" class="btn btn-primary btn-darkorange" >确认</a>
+	 </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
+                           </div> <!--row end-->
+                         </div>
+                     </div>
+                 </div>
+             </div>
+      	<!--row end-->
+
+<script type="text/javascript">
+ function dodel(id){
+        $('.modal').modal('show').on('shown.bs.modal',function(){
+            $(".btn-primary").attr('href','/deploy/key_delete/?node_name='+id);
+        })
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,7 @@
+组件要求：
+1.Django1.6.X
+2.Cobbler
+3.saltstack 2015.5.2 (Lithium)
+4.salt-api 2015.5.2
+5.MySQL-python、MySQL
+6.salt_event_to_mysql.py（事件捕捉程序）

@@ -1,0 +1,98 @@
+{% extends "index.html" %}
+{% block title %}OPS_Install{% endblock %}
+{% block css %}
+<!-- DataTables-->
+<link rel="stylesheet" href="/static/plugins/dataTables/css/dataTables.css">
+{% endblock %}
+{% block content %}
+<div class="page-content">
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">Dashboard</a>
+                        </li>
+                        <li class="active">OS管理</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                <!-- Page Header -->
+				<div class="page-header position-relative">
+                    <div class="header-title">
+                        <h1>
+                            OS列表
+                        </h1>
+                    </div>
+                    <!--Header Buttons-->
+                    <div class="header-buttons">
+                        <a class="sidebar-toggler" href="#">
+                            <i class="fa fa-arrows-h"></i>
+                        </a>
+                        <a class="refresh" id="refresh-toggler" href="">
+                            <i class="glyphicon glyphicon-refresh"></i>
+                        </a>
+                        <a class="fullscreen" id="fullscreen-toggler" href="#">
+                            <i class="glyphicon glyphicon-fullscreen"></i>
+                        </a>
+                    </div>
+                    <!--Header Buttons End-->
+                </div>
+                <!-- /Page Header -->
+
+
+       <div class="row">
+            <div class="col-md-12">
+                 <div class="panel panel-default">
+                      <div class="panel-body">
+                           {% if all_config_os_list %}
+                           <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                               <thead>
+                                   <tr>
+                                      <th>ID</th>
+									  <th>操作系统</th>
+                                      <th>创建时间</th>
+									  <th>状态</th>
+									  <!--th>操作</th-->
+                                   </tr>
+                               </thead>
+                               
+                               <tbody>
+                               {% for os_list in all_config_os_list %}
+                                   <tr>
+                                      <td>{{ forloop.counter }}</td>
+									  <td>{{ os_list.os }}</td>								  
+                                      <td>{{ os_list.create_date }}</td>
+									  <td>{{ os_list.isActivated }}</td>
+                                   </tr>
+                               {% endfor %}
+                               </tbody>
+                            </table>
+                           {% endif %}
+                           <div class="row">
+                                <div class="col-xs-6">
+                                      <div class="dataTables_info" id="example_info" role="alert" aria-live="polite" aria-relevant="all">
+									  </div>
+                                </div>
+                                <div class="col-xs-6">
+                                      <div class="dataTables_paginate paging_simple_numbers" id="exmaple_paginate">
+                                            <a href="/config/get_os_list/?action=sync" class="btn btn-info btn-sm" role="button">同步</a>
+										   {% if all_config_os_list.has_previous %}
+                                                 <a href="?page={{ all_config_os_list.previous_page_number }}">上一页</a>
+                                           {% endif %}
+                                           <span class="current">
+                                                 第{{ all_config_os_list.number }}页，共{{ all_config_os_list.paginator.num_pages }}页
+                                           </span>
+                                           {% if all_config_os_list.has_next %}
+                                                 <a href="?page={{ all_config_os_list.next_page_number }}">下一页</a>
+                                           {% endif %}
+                                      </div>
+                                </div>
+                           </div> <!--row end-->                                   
+                        </div>
+                     </div>
+                 </div>
+             </div>
+      	<!--row end-->
+
+{% endblock %}

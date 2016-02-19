@@ -1,0 +1,27 @@
+{% extends "index.html" %}
+{% block title %}Opsa{% endblock %}
+{% block content %}
+<div class="page-content">
+    <div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-body panel-default">
+                <h1 class="text-center"> <i class="fa fa-frown-o yellow"></i>信息报错：</h1>
+                <p class="text-center">{{ title}}</p>
+				<p class="text-center">{{ ret_err }}</p>
+				{% if ret_e %}
+				<h2 class="text-center"> <i class="fa fa-frown-o yellow"></i>详细报错：</h2>
+				<p class="text-center">{{ ret_e }}</p>
+				{% endif %}
+				<div class="panel panel-default">
+					<div class="col-md-3">
+						<a class="btn btn-info btn-block btn-3d" href="{% url 'index' %}">Back to Dashboard</a>
+					</div>
+					<div class="col-md-3">
+						<button class="btn btn-primary btn-block btn-3d" onclick="history.back();">Previous Page</button>
+					</div>
+				</div>
+			</div><!--/panel-body-->
+		</div><!--/col-md-12-->
+	</div><!--/row-->
+</div><!--/page-content-->
+{% endblock %}

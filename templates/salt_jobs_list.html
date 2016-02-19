@@ -1,0 +1,130 @@
+{% extends "index.html" %}
+{% block title %}OPSA-jobs{% endblock %}
+{% block css %}
+<!-- DataTables-->
+<link rel="stylesheet" href="/static/plugins/dataTables/css/dataTables.css">
+
+{% endblock %}
+{% block content %}
+			<div class="page-content">
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">Dashboard</a>
+                        </li>
+                        <li class="active">设备管理</li>
+						<li class="active">主机列表</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                <!-- Page Header -->
+				<div class="page-header position-relative">
+                    <div class="header-title">
+                        <h1>
+                            JOB列表
+                        </h1>
+                    </div>
+                    <!--Header Buttons-->
+                    <div class="header-buttons">
+                        <a class="sidebar-toggler" href="#">
+                            <i class="fa fa-arrows-h"></i>
+                        </a>
+                        <a class="refresh" id="refresh-toggler" href="">
+                            <i class="glyphicon glyphicon-refresh"></i>
+                        </a>
+                        <a class="fullscreen" id="fullscreen-toggler" href="#">
+                            <i class="glyphicon glyphicon-fullscreen"></i>
+                        </a>
+                    </div>
+                    <!--Header Buttons End-->
+                </div>
+                <!-- /Page Header -->
+				
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-body">
+                      <div class="panel-body">
+						  <div class="form-search">
+							  <form class="form-search " action="." method="post">
+							  {% csrf_token %}
+								<div class="input-group col-md-4 pull-right">
+									<select name="search_type" style="width:30%;">
+										<option value="jid" />JID
+										<option value="tgt" />目标
+										<option value="fun" />功能
+										<option value="status" />状态
+									</select>								
+									<input type="text" class="form-control" name='search' style="width:70%;">
+									<span class="input-group-btn">
+											<button class="btn btn-default shiny" type="submit"><i class="glyphicon glyphicon-search danger circular"></i></button>
+									</span>
+								</div>			
+							  </form>
+						  </div>
+					   </div><!--panel-body-->
+                           {% if all_jobs %}
+						   <div class="flip-scroll">
+							   <table class="table table-striped table-bordered table-hover">
+								   <thead class="flip-content bordered-palegreen">
+									   <tr>
+										  <th>ID</th>
+										  <th>JID</th>
+										  <th>目标</th>
+										  <th>功能</th>
+										  <th>状态</th>
+										  <th>执行时间</th>
+									   </tr>
+									</thead>
+                               
+                               <tbody>
+                               {% for all_job in all_jobs %}
+                                   <tr>
+                                      <td>{{ forloop.counter }}</td>                                      
+                                      <td><a href="/deploy/job_result/?jid={{ all_job.jid }}&tgt={{ all_job.tgt}}">{{ all_job.jid }}</a></td>
+									  <td>{{ all_job.tgt }}</td>
+                                      <td>{{ all_job.fun }}</td>
+                                      {% if all_job.status == '1' %}
+										<td><span class="label label-success">
+                                            <i class="fa-fw fa fa-check"></i>
+                                            <strong>成 功</strong>
+                                        </span> </td>
+									  {% elif all_job.status == '2' %}
+										<td><span class="label label-info"><i class="fa-fw fa fa-spinner"></i><strong>执行中</strong></span></td>
+									  {% else %}
+									
+										<td><span class="label label-darkorange">  <i class="fa-fw fa fa-times"></i><strong> 失 败</strong></span></td>
+									  {% endif %}
+                                      <td>{{ all_job.create_date }}</td>
+                                      
+                                   </tr>
+                               {% endfor %}
+                               </tbody>
+                            </table>
+						</div>
+                           {% endif %}
+                                 <div class="col-xs-6">
+                                       <div class="dataTables_info" id="example_info" role="alert" aria-live="polite" aria-relevant="all"></div>
+                                 </div>
+                                 <div class="offset5">
+                                      <div class="dataTables_paginate paging_simple_numbers" id="exmaple_paginate">
+										   <!--a href="/asset/hosts_autget/?action=flush" class="btn btn-info btn-sm" role="button">同步</a-->
+                                           <!--a href="{% url 'add_host' %}" class="btn btn-info btn-sm" role="button">添加</a-->
+                                           {% if all_jobs.has_previous %}
+                                                <a href="?page={{ all_host_list.previous_page_number }}&search={{ search }}&search_type={{ search_type }}">上一页</a>
+                                           {% endif %}
+                                           <span class="current">
+                                                第{{ all_jobs.number }}页，共{{ all_jobs.paginator.num_pages }}页
+                                           </span> 
+                                           {% if all_jobs.has_next %}
+                                                <a href="?page={{ all_jobs.next_page_number }}&search={{ search }}&search_type={{ search_type }}">下一页</a>
+                                           {% endif %}
+                                      </div>
+                                 </div>
+                           
+                </div><!--panel-default-->
+            </div><!--col-md-12-->
+        </div> 	<!--row end-->
+
+{% endblock %}

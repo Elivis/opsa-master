@@ -1,0 +1,50 @@
+{% extends "index.html" %}
+
+{% block title %}
+    Role List
+{% endblock %}
+
+{% block content %}
+<div class="page-content">
+    <div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-body panel-default">
+				<div class="btn-toolbar">
+					<div class="btn-group">
+						{% url "addroleurl" as theaddroleurl %}
+						<a class="btn btn-default {%if request.path = theaddroleurl%} active {%endif%}" href={{ theaddroleurl }}><span class="glyphicon glyphicon-edit"></span>新建角色</a>
+						{% url "listroleurl" as thelistroleurl %}
+						<a class="btn btn-default {%if request.path = thelistroleurl%} active {%endif%}" href={{ thelistroleurl }}><span class="glyphicon glyphicon-list"></span>角色列表</a>
+					</div>
+				</div>
+
+				<hr/>
+
+				<div class="flip-scroll">
+					<table class="table table-striped table-bordered table-hover">
+						<thead class="flip-content bordered-palegreen">
+						<tr>
+							<th>角色名称</th>
+							<th>操作</th>
+						</tr>
+						</thead>
+						<tbody>
+						{% for i in lPage %}
+							<tr style="font-size: 13px;">
+								<td>{{ i.name }} </td>
+
+								<td>
+									<a href={% url "editroleurl" i.id %} onclick="return confirm('确认编辑角色吗？？')"><span class="glyphicon glyphicon-edit btn-xs"></span></a>
+									<a href={% url "deleteroleurl" i.id %} onclick="return confirm('确认删除角色吗？？')"><span class="glyphicon glyphicon-trash btn-xs"></span></a>
+								</td>
+							</tr>
+						{% endfor %}
+						</tbody>
+				</table>
+			  </div>
+			</div><!--/panel-body-->
+		</div><!--/col-md-12-->
+	</div><!--/row-->
+</div><!--/page-content-->
+    {% include "common/paginator.html" %}
+{% endblock %}

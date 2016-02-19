@@ -1,0 +1,104 @@
+{% extends "index.html" %}
+{% load url from future %}
+{% block content %}
+ 			<div class="page-content">
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">Dashboard</a>
+                        </li>
+                        <li class="active">设备管理</li>
+						<li class="active">{{ page_name }}</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                <!-- Page Header -->
+				<div class="page-header position-relative">
+                    <div class="header-title">
+                        <h1>
+                            {{ page_name }}
+                        </h1>
+                    </div>
+                    <!--Header Buttons-->
+                    <div class="header-buttons">
+                        <a class="sidebar-toggler" href="#">
+                            <i class="fa fa-arrows-h"></i>
+                        </a>
+                        <a class="refresh" id="refresh-toggler" href="">
+                            <i class="glyphicon glyphicon-refresh"></i>
+                        </a>
+                        <a class="fullscreen" id="fullscreen-toggler" href="#">
+                            <i class="glyphicon glyphicon-fullscreen"></i>
+                        </a>
+                    </div>
+                    <!--Header Buttons End-->
+                </div>
+                <!-- /Page Header -->
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <form class="form-horizontal form-border" id="form" method="post" action=".">
+                                       {% csrf_token %}
+                                       <div class="form-group">
+                                             <label class="col-sm-3 control-label">机房名称</label>
+                                             <div class="col-sm-6">
+                                             {{ form.idc_name }}
+                                             {{ form.idc_name.errors }}
+                                             </div>
+                                       </div>
+                                       <div class="form-group">
+                                             <label class="col-sm-3 control-label">机房类型</label>
+                                             <div class="col-sm-6">
+                                             {{ form.idc_type }}
+                                             {{ form.idc_type.errors }}
+                                             </div>
+                                        </div>
+                                        <div class="form-group">
+                                             <label class="col-sm-3 control-label">机房位置</label>
+                                             <div class="col-sm-6">
+                                             {{ form.idc_location }}
+                                             {{ form.idc_location.errors }}
+                                             </div>
+                                        </div>
+                                        <div class="form-group">
+                                             <label class="col-sm-3 control-label">到期时间</label>
+                                             <div class="col-sm-6">
+                                             {{ form.contract_date }}
+					     {{ form.contract_date.errors }}
+                                             </div>
+                                        </div>
+                                        <div class="form-group">
+                                             <label class="col-sm-3 control-label">机房联系电话</label>
+                                             <div class="col-sm-6">
+                                             {{ form.idc_contacts }}
+                                             {{ form.idc_contacts.errors }}
+                                             </div>
+                                        </div>
+                                        <div class="form-group">
+                                             <label class="col-sm-3 control-label">备注</label>
+                                             <div class="col-sm-6">
+                                             {{ form.remark }}
+					     {{ form.remark.errors }}
+                                              </div>
+                                         </div> 
+                                         <div class="col-sm-offset-8 col-sm-10">
+                                             {% ifequal action 'add' %}
+                                             <button type="submit" class="btn btn-primary">添加</button>
+                                             {% endifequal %}
+                                             {% ifequal action 'edit' %}
+                                             <button type="submit" class="btn btn-primary" name="operate" value="update">更新</button>
+                                             {% endifequal %}
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div> <!-- panel body -->
+                        </div> <!-- panel end -->
+                    </div> <!-- col end -->
+                </div> <!-- row end -->
+
+{% endblock %}

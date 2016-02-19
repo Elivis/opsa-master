@@ -1,0 +1,304 @@
+{% extends "index.html" %}
+{% block title %}OPSA-grains{% endblock %}
+{% block css %}
+<!-- DataTables-->
+<link rel="stylesheet" href="/static/plugins/dataTables/css/dataTables.css">
+
+{% endblock %}
+
+{% block content %}
+
+<div class="page-content">
+	<!-- Page Breadcrumb -->
+	<div class="page-breadcrumbs">
+		<ul class="breadcrumb">
+			<li>
+				<i class="fa fa-home"></i>
+				<a href="/">Dashboard</a>
+			</li>
+			<li class="active"><a href="{% url 'host_list' %}" >Minions</a></li>
+		</ul>
+	</div>
+	<!-- /Page Breadcrumb -->
+	<!-- Page Header -->
+	<div class="page-header position-relative">
+		<div class="header-title">
+			<h1>
+				服务器管理
+			</h1>
+		</div>
+		<!--Header Buttons-->
+		<div class="header-buttons">
+			<a class="sidebar-toggler" href="#">
+				<i class="fa fa-arrows-h"></i>
+			</a>
+			<a class="refresh" id="refresh-toggler" href="">
+				<i class="glyphicon glyphicon-refresh"></i>
+			</a>
+			<a class="fullscreen" id="fullscreen-toggler" href="#">
+				<i class="glyphicon glyphicon-fullscreen"></i>
+			</a>
+		</div>
+		<!--Header Buttons End-->
+	</div>
+	<!-- /Page Header -->
+	<!-- Page Body -->
+                <div class="page-body no-padding">
+                    <div class="mail-container panel panel-body panel-default">
+                        <div class="mail-header">
+                            <ul class="header-buttons">
+                                <li>
+                                    <a href="/asset/grains_get/?id={{ hostname }}" class="tooltip-primary" data-toggle="tooltip" data-original-title="grains"><i class="fa fa-external-link"></i> </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'host_manage' id=hostid %}" class="tooltip-primary" data-toggle="tooltip" data-original-title="编辑"><i class="glyphicon glyphicon-edit"></i></a>
+                                </li>
+                                <li>
+                                    <a onclick="history.back();" class="tooltip-primary" data-toggle="tooltip" data-original-title="返回"><i class="glyphicon glyphicon-backward"></i></a>
+                                </li>
+                                <li>
+                                    <a class="tooltip-primary" data-toggle="tooltip" data-original-title="Draft"><i class="glyphicon glyphicon-save"></i></a>
+                                </li>
+                            </ul>
+
+                            <div class="draft">
+                                host-control
+                            </div>
+                        </div>
+                        <div class="mail-body ">                          
+							 
+                                    <div class="widget">
+                                        <div class="widget-header bordered-bottom bordered-blue">
+                                            <span class="widget-caption">服务器详情</span>
+
+                                            <div class="widget-buttons">
+                                                <a href="#" data-toggle="maximize">
+                                                    <i class="fa fa-expand"></i>
+                                                </a>
+                                                <a href="#" data-toggle="collapse">
+                                                    <i class="fa fa-minus"></i>
+                                                </a>
+                                                <!--a href="#" data-toggle="dispose">
+                                                    <i class="fa fa-times"></i>
+                                                </a-->
+                                            </div>
+                                        </div>
+
+                                        <div class="widget-body no-padding">
+                                            <div class="widget-main ">
+                                                <div class="panel-group accordion" id="accordion">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading ">
+                                                            <h4 class="panel-title">
+                                                                <a class="accordion-toggle" data-toggle="collapse" href="#collapseOne">
+                                                                    基本信息
+                                                                </a>
+                                                            </h4>
+                                                        </div>
+                                                        <div id="collapseOne" class="panel-collapse collapse in">
+                                                            <div class="well">
+															{% for host in hostinfo %}
+                                                             <table class="table table-striped table-bordered table-hover">
+																<tbody>													
+																
+																	<tr>
+																		<td>
+																			<font color="#6495ED">ID：</font> <font color="#000000">{{ host.id }}</font>
+																		</td>
+																		<td class="hidden-xs">
+																			<font color="#6495ED">状态：</font> 
+																			{% if host.status == 'True' %}
+																				<span class="label label-success"><i class="fa-fw fa fa-check"></i><strong>UP</strong></span>
+																			{% else %}									
+																				<span class="label label-darkorange">  <i class="fa-fw fa fa-times"></i><strong>Down</strong></span>
+																			{% endif %}
+																		</td>
+																		<td>
+																			<font color="#6495ED">所在区域：</font> <font color="#000000">{{ host.idc_jg }}</font>
+																		</td>
+																	   
+																	</tr>
+																	<tr>
+																		<td>
+																			<font color="#6495ED">主机名：</font> <font color="#000000">{{ host.hostname }}</font>
+																		</td>
+																		<td class="hidden-xs">
+																			<font color="#6495ED">描述：</font> <font color="#000000">{{ host.remark }}</font>
+																		</td>
+																		<td>
+																			<font color="#6495ED">地域：</font> <font color="#000000">{{ host.remark }}</font>
+																		</td>
+																		
+																	</tr>
+																	<tr>
+																		<td>
+																			<font color="#6495ED">型号：</font> <font color="#000000">{{ host.manufacturer }}</font>
+																		</td>
+																		<td class="hidden-xs">
+																			<font color="#6495ED">zabbix状态：</font> <font color="#000000">{{ host.status }}</font>
+																		</td>
+																		<td>
+																			<font color="#6495ED">操作系统：</font> <font color="#000000">{{ host.os_ver }}</font>
+																		</td>
+																		
+																	</tr>																
+																</tbody>
+															 </table>
+															</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            <h4 class="panel-title">
+                                                                <a class="accordion-toggle" data-toggle="collapse" href="#collapseTwo">
+                                                                    配置信息
+                                                                </a>
+                                                            </h4>
+                                                        </div>
+                                                        <div id="collapseTwo" class="panel-collapse collapse in">
+                                                            <div class="well">
+                                                             <table class="table table-striped table-bordered table-hover">
+																<tbody>
+																	<tr>
+																		<td>
+																			<font color="#6495ED">cpu型号：</font> <font color="#000000">{{ host.cpu_model }}</font>
+																		</td>
+																		<td class="hidden-xs">
+																			<font color="#6495ED">内存大小：</font> <font color="#000000">{% widthratio host.mem 1008 1 %}GB</font>
+																		</td>
+																		<td>
+																			<font color="#6495ED">系统盘大小：</font> <font color="#000000"> </font>
+																		</td>
+																	   
+																	</tr>
+																	<tr>
+																		<td>
+																			<font color="#6495ED">操作系统：</font> <font color="#000000">{{ host.os_ver }}</font>
+																		</td>
+																		<td class="hidden-xs">
+																			<font color="#6495ED">IP地址：</font> <font color="#000000">{{ host.ip }}</font>
+																		</td>
+																		<td>
+																			<font color="#6495ED">其他IP地址：</font> <font color="#000000"></font>
+																		</td>
+																		
+																	</tr>
+																	<tr>
+																		<td>
+																			<font color="#6495ED">品牌：</font> <font color="#000000">{{ host.productname }}</font>
+																		</td>
+																		<td class="hidden-xs">
+																			<font color="#6495ED">salt版本：</font> <font color="#000000">{{ host.version }}</font>
+																		</td>
+																		<td>
+																			<font color="#6495ED"> </font> <font color="#000000"> </font>
+																		</td>
+																		
+																	</tr>
+																</tbody>
+															</table>
+															</div>
+                                                        </div>
+                                                       </div>
+
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            <h4 class="panel-title">
+                                                                <a class="accordion-toggle" data-toggle="collapse" href="#collapseThree">
+                                                                    其他信息
+                                                                </a>
+                                                            </h4>
+                                                        </div>
+                                                        <div id="collapseThree" class="panel-collapse collapse in">
+                                                           <div class="well">
+                                                             <table class="table table-striped table-bordered table-hover">
+																<tbody>
+																	<tr>
+																		<td>
+																			<font color="#6495ED">分组：</font> <font color="#000000">
+																				{% for i in host.hostgroups_set.all %}
+																					{{ i }},
+																				{% endfor %}
+																			</font>
+																		</td>
+																</tr>
+																<tr>
+																		<td class="hidden-xs">
+																			<font color="#6495ED">描述：</font> <font color="#000000">{{ host.remark }}</font>
+																		</td>																
+																	   
+																	</tr>																																	
+																</tbody>
+															</table>
+															{% endfor %}
+															</div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                               
+                                
+                        </div>
+                        <div class="mail-sidebar panel panel-body panel-default">
+                            <ul class="mail-menu">
+                                <li>
+                                    <a href="{% url 'hostinfo' id=hostid %}">
+                                        <i class="fa fa-inbox"></i>
+                                        <span class="badge badge-default badge-square pull-right"></span>
+                                        服务器详情
+                                    </a>
+                                </li>
+								
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star"></i>
+                                        <span class="badge badge-default badge-square pull-right"></span>
+                                        资产信息
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="glyphicon glyphicon-share"></i>
+                                        <span class="badge badge-default badge-square pull-right"></span>
+                                        监控信息
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-envelope"></i>
+                                        服务器配置信息
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-ban"></i>
+                                        <span class="badge badge-default badge-square pull-right"></span>
+                                        服务器操作
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-trash-o"></i>
+                                        服务器管理
+                                    </a>
+                                </li>
+                                <li class="divider">
+                                </li>
+                                
+                            </ul>
+						</div> <!-- mail-sidebar-->
+                    </div><!--mail-container-->
+                </div> <!-- /Page Body -->			
+</div> <!--page-content-->
+{% block script%}
+<script>
+	document.getElementById("sidebar").className="page-sidebar menu-compact";
+</script>
+{% endblock%}
+{% endblock %}
