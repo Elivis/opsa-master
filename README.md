@@ -16,12 +16,12 @@ zabbix监控：通过api地址不同的dashboard;
 系统管理：api配置文件的管理，同步信息的管理
 用户管理：普通用户管理；后期增加第三方认证，权限组管理等
 4. Demo Screenshots
-![Demo Screenshots]https://github.com/Elivis/opsa-master/blob/master/demo/menu.jpg
-![Demo Screenshots]https://github.com/Elivis/opsa-master/blob/master/demo/install_form.jpg
-![Demo Screenshots]https://github.com/Elivis/opsa-master/blob/master/demo/install_status.jpg
-![Demo Screenshots]https://github.com/Elivis/opsa-master/blob/master/demo/salt_keys.jpg
-![Demo Screenshots]https://github.com/Elivis/opsa-master/blob/master/demo/salt_job.jpg
-![Demo Screenshots]https://github.com/Elivis/opsa-master/blob/master/demo/salt_minions.jpg
+![image]https://github.com/Elivis/opsa-master/blob/master/demo/menu.jpg
+![image]https://github.com/Elivis/opsa-master/blob/master/demo/install_form.jpg
+![image]https://github.com/Elivis/opsa-master/blob/master/demo/install_status.jpg
+![image]https://github.com/Elivis/opsa-master/blob/master/demo/salt_keys.jpg
+![image]https://github.com/Elivis/opsa-master/blob/master/demo/salt_job.jpg
+![image]https://github.com/Elivis/opsa-master/blob/master/demo/salt_minions.jpg
 
 
 
